@@ -137,6 +137,7 @@
 
         .form-group {
             margin-bottom: 1.5rem;
+            position: relative;
         }
 
         .form-group label {
@@ -152,6 +153,19 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
+            max-width: 100%;
+        }
+
+        /* Fix for mobile dropdown overflow */
+        .form-group select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.7rem center;
+            background-size: 1.5rem;
+            padding-right: 2.5rem;
         }
 
         .checkbox-group {
@@ -195,34 +209,53 @@
             text-align: center;
         }
 
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .error-message {
+            color: var(--secondary);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        .form-group.error input,
+        .form-group.error select {
+            border-color: var(--secondary);
+        }
+
         /* Payment Modal */
         .modal {
             display: none;
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 1000;
             align-items: center;
             justify-content: center;
-            padding: 0;
+            padding: 1rem;
         }
 
         .modal-content {
             background-color: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            width: 95%;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 100%;
             max-width: 500px;
+            position: relative;
             max-height: 90vh;
             overflow-y: auto;
-            position: relative;
-        }
-
-        /* Disable background scroll when modal opens */
-        body.modal-open {
-            overflow: hidden;
         }
 
         .close-modal {
@@ -244,7 +277,7 @@
             align-items: flex-start;
             padding: 1rem;
             border: 2px solid #ddd;
-            border-radius: 8px;
+            border-radius: 5px;
             margin-bottom: 1rem;
             cursor: pointer;
             transition: border-color 0.3s;
@@ -274,6 +307,7 @@
         .payment-option-content {
             flex: 1;
             min-width: 0;
+            overflow: hidden;
         }
 
         .payment-option-content strong {
@@ -291,90 +325,6 @@
             display: block;
             word-wrap: break-word;
         }
-
-        /* Tablet */
-        @media (max-width: 768px) {
-            .modal-content {
-                padding: 1.2rem;
-                max-height: 85vh;
-            }
-
-            .payment-option {
-                padding: 0.8rem;
-                gap: 0.6rem;
-            }
-
-            .payment-icon {
-                font-size: 1.3rem;
-                width: 28px;
-            }
-        }
-
-        /* Mobile */
-        @media (max-width: 480px) {
-            .modal-content {
-                padding: 1rem;
-                width: 95%;
-                max-height: 85vh;
-            }
-
-            .payment-option {
-                padding: 0.75rem;
-                gap: 0.5rem;
-            }
-
-            .payment-icon {
-                font-size: 1.2rem;
-                width: 24px;
-            }
-
-            .payment-option input {
-                width: 16px;
-                height: 16px;
-            }
-
-            .payment-option-content strong {
-                font-size: 0.9rem;
-            }
-
-            .payment-option-content small {
-                font-size: 0.8rem;
-            }
-        }
-
-        /* Extra small phones (iPhone SE etc.) */
-        @media (max-width: 320px) {
-            .modal-content {
-                width: 98%;
-                padding: 0.8rem;
-                border-radius: 8px;
-            }
-
-            .payment-option {
-                padding: 0.6rem;
-                gap: 0.4rem;
-                flex-wrap: wrap;
-            }
-
-            .payment-icon {
-                font-size: 1rem;
-                width: 22px;
-            }
-
-            .payment-option input {
-                width: 14px;
-                height: 14px;
-            }
-
-            .payment-option-content strong {
-                font-size: 0.85rem;
-            }
-
-            .payment-option-content small {
-                font-size: 0.75rem;
-            }
-        }
-
 
         /* Footer */
         footer {
@@ -469,6 +419,14 @@
                 padding: 1.5rem;
             }
 
+            /* Fix for mobile dropdown */
+            .form-group select {
+                font-size: 16px;
+                /* Prevents zoom on iOS */
+                max-width: 100%;
+                width: 100%;
+            }
+
             .footer-content {
                 flex-direction: column;
             }
@@ -526,26 +484,11 @@
                 font-size: 1.1rem;
                 margin-right: 0.6rem;
             }
-        }
 
-        @media (max-width: 360px) {
-            .payment-option {
-                flex-wrap: wrap;
-            }
-
-            .payment-option-header {
-                display: flex;
-                align-items: center;
-                width: 100%;
-                margin-bottom: 0.5rem;
-            }
-
-            .payment-option input {
-                margin-right: 0.6rem;
-            }
-
-            .payment-icon {
-                margin-right: 0.6rem;
+            /* Ensure dropdown fits on very small screens */
+            .form-group select {
+                font-size: 14px;
+                padding: 0.7rem;
             }
         }
     </style>
@@ -582,8 +525,8 @@
                     <h2>Booking Details</h2>
                     <form id="bookingForm">
                         <div class="form-group">
-                            <label>Event</label>
-                            <select required>
+                            <label for="event">Event *</label>
+                            <select id="event" name="event" required>
                                 <option value="">Select an event</option>
                                 <option value="music-festival">Bristol Music Festival - March 15-17, 2024</option>
                                 <option value="jazz-night">Summer Jazz Night - June 25, 2024</option>
@@ -592,36 +535,40 @@
                                 <option value="art-exhibition">Modern Art Exhibition - April 1-30, 2024</option>
                                 <option value="photo-expo">Photography Expo - May 10-15, 2024</option>
                             </select>
+                            <div class="error-message">Please select an event</div>
                         </div>
 
                         <div class="form-group">
-                            <label>Number of Tickets</label>
-                            <input type="number" min="1" max="10" value="1" required>
+                            <label for="tickets">Number of Tickets *</label>
+                            <input type="number" id="tickets" name="tickets" min="1" max="10" value="1" required>
+                            <div class="error-message">Please enter number of tickets (1-10)</div>
                         </div>
 
                         <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" required>
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                            <div class="error-message">Please enter your full name</div>
                         </div>
 
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" required>
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="error-message">Please enter a valid email address</div>
                         </div>
 
                         <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="tel">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
                         </div>
 
                         <div class="form-group">
                             <div class="checkbox-group">
-                                <input type="checkbox" id="student">
+                                <input type="checkbox" id="student" name="student">
                                 <label for="student" style="margin: 0;">I am a student (10% discount)</label>
                             </div>
                         </div>
 
-                        <button type="button" class="btn" id="proceedToPayment">Proceed to Payment</button>
+                        <button type="button" class="btn" id="proceedToPayment" disabled>Proceed to Payment</button>
                     </form>
                 </div>
 
@@ -725,13 +672,71 @@
             document.querySelector('nav ul').classList.toggle('show');
         });
 
+        // Form Validation
+        const form = document.getElementById('bookingForm');
+        const proceedBtn = document.getElementById('proceedToPayment');
+        const requiredFields = form.querySelectorAll('[required]');
+
+        function validateForm() {
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                const formGroup = field.closest('.form-group');
+                if (!field.value.trim()) {
+                    formGroup.classList.add('error');
+                    isValid = false;
+                } else {
+                    formGroup.classList.remove('error');
+                }
+
+                // Special validation for email
+                if (field.type === 'email' && field.value.trim()) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(field.value.trim())) {
+                        formGroup.classList.add('error');
+                        isValid = false;
+                    }
+                }
+
+                // Special validation for tickets
+                if (field.name === 'tickets' && field.value.trim()) {
+                    const tickets = parseInt(field.value);
+                    if (tickets < 1 || tickets > 10) {
+                        formGroup.classList.add('error');
+                        isValid = false;
+                    }
+                }
+            });
+
+            return isValid;
+        }
+
+        // Real-time form validation
+        requiredFields.forEach(field => {
+            field.addEventListener('input', function () {
+                const formGroup = this.closest('.form-group');
+                if (this.value.trim()) {
+                    formGroup.classList.remove('error');
+                }
+                proceedBtn.disabled = !validateForm();
+            });
+
+            field.addEventListener('change', function () {
+                proceedBtn.disabled = !validateForm();
+            });
+        });
+
+        // Initial validation
+        proceedBtn.disabled = true;
+
         // Payment Modal Functionality
         const modal = document.getElementById('paymentModal');
-        const proceedBtn = document.getElementById('proceedToPayment');
         const closeModal = document.querySelector('.close-modal');
 
         proceedBtn.addEventListener('click', function () {
-            modal.style.display = 'flex';
+            if (validateForm()) {
+                modal.style.display = 'flex';
+            }
         });
 
         closeModal.addEventListener('click', function () {
@@ -747,7 +752,13 @@
         function processPayment() {
             alert('Payment processed successfully! This is a demo - no real transaction occurred.');
             modal.style.display = 'none';
-            document.getElementById('bookingForm').reset();
+            form.reset();
+            proceedBtn.disabled = true;
+
+            // Clear error states
+            document.querySelectorAll('.form-group.error').forEach(group => {
+                group.classList.remove('error');
+            });
         }
     </script>
 </body>
