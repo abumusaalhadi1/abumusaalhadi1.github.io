@@ -69,7 +69,7 @@
             color: var(--accent);
         }
 
-        
+
 
         /* Header */
         header {
@@ -264,107 +264,110 @@
         }
 
         /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 15px;
-            }
-            
-            main {
-                padding: 0 15px;
-            }
-            
-            .hamburger {
-                display: block;
-            }
-
-            nav ul {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                padding: 1rem 0;
-            }
-
-            nav ul.show {
-                display: flex;
-            }
-
-            nav ul li {
-                margin: 0.5rem 0;
-                text-align: center;
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .contact-info, .contact-form {
-                padding: 1.5rem;
-            }
-            
-            .contact-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .contact-icon {
-                margin-bottom: 0.5rem;
-            }
-
-            .footer-content {
-                flex-direction: column;
-            }
-            
-            .footer-section {
-                min-width: 100%;
-            }
-
-            @media (max-width: 768px) {
-    .contact-container {
-        grid-template-columns: 1fr !important;
-        gap: 1.5rem;
-        width: 100% !important;
-        margin: 0 auto !important;
-    }
-
-    .contact-info, .contact-form {
-        width: 100% !important;
-        margin: 0 auto !important;
-        padding: 1.2rem !important;
-    }
-
-    .contact-info, .contact-form {
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-}
-
-        }
-        
-        @media (max-width: 480px) {
-            .contact-info, .contact-form {
-                padding: 1rem;
-            }
-            
-            .contact-item {
-                margin-bottom: 1rem;
-            }
-
-            @media (max-width: 480px) {
-    .contact-info, .contact-form {
-        width: 100% !important;
-        margin: 0 auto !important;
-        padding: 1rem !important;
-    }
+@media (max-width: 768px) {
     .container {
-        padding: 0 9px !important;
+        padding: 0 15px;
+    }
+
+    main {
+        padding: 0 15px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--primary);
+        padding: 1rem 0;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 0.5rem 0;
+        text-align: center;
+    }
+
+    /* Contact section fixes - KEEP original layout */
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .contact-info,
+    .contact-form {
+        width: 100%;
+        margin: 0 auto;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-item {
+        flex-direction: row; /* Keep horizontal for better readability */
+        align-items: flex-start;
+        margin-bottom: 1rem;
+    }
+
+    .contact-icon {
+        margin-right: 1rem;
+        margin-bottom: 0;
+        min-width: 25px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-section {
+        min-width: 100%;
     }
 }
 
-        }
+@media (max-width: 480px) {
+    .contact-info,
+    .contact-form {
+        padding: 1rem;
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    .contact-item {
+        margin-bottom: 1rem;
+        flex-direction: row; /* Keep horizontal on mobile too */
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+    
+    .contact-icon {
+        font-size: 1.1rem;
+        min-width: 22px;
+        margin-right: 0.8rem;
+    }
+    
+    /* For very small screens, make text smaller */
+    .contact-info h3,
+    .contact-form h2 {
+        font-size: 1.1rem;
+    }
+    
+    .contact-info p,
+    .contact-form label {
+        font-size: 0.9rem;
+    }
+}
     </style>
 </head>
 
@@ -530,4 +533,5 @@
         });
     </script>
 </body>
+
 </html>
